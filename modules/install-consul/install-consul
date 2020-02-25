@@ -8,7 +8,7 @@
 
 set -e
 
-echo "mabadillamycwt modified - install-consul 5"
+echo "mabadillamycwt modified - install-consul 6"
 
 readonly DEFAULT_INSTALL_PATH="/opt/consul"
 readonly DEFAULT_CONSUL_USER="consul"
@@ -96,10 +96,10 @@ function retry_download {
 
     # The boolean operations with the exit status are there to temporarily circumvent the "set -e" at the
     # beginning of this script which exits the script immediatelly for error status while not losing the exit status code
-    
-    [200 -ne $(curl --write-out %{http_code} -o '${DOWNLOAD_PACKAGE_PATH}' '${download_url}' --location --silent --fail --show-error)] && exit_status=0 || exit_status=$?
+    output=$(wget -O ${DOWNLOAD_PACKAGE_PATH} ${DOWNLOAD_URL} --quiet) && exit_status=0 || exit_status=$?
+    log_info "$output"
     if [[ $exit_status -eq 0 ]]; then
-      echo "Download binary success"
+      echo "$output"
       return
     fi
     log_warn "$description failed. Will sleep for 10 seconds and try again."

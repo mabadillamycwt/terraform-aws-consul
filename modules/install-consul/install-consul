@@ -8,6 +8,8 @@
 
 set -e
 
+echo "mabadillamycwt modified - install-consul"
+
 readonly DEFAULT_INSTALL_PATH="/opt/consul"
 readonly DEFAULT_CONSUL_USER="consul"
 readonly DOWNLOAD_PACKAGE_PATH="/tmp/consul.zip"
